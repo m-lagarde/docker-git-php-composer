@@ -19,6 +19,8 @@ RUN docker-php-ext-install intl && \
     docker-php-ext-enable protobuf && \
     docker-php-ext-enable xdebug
 
+RUN echo 'memory_limit = 1024M' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
+
 ## Install composer
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
