@@ -1,10 +1,10 @@
 FROM php:7.3-fpm
 
 RUN apt-get update && \
-    apt-get install -y libpng-dev libjpeg-dev libpq-dev zip unzip sudo wget zlib1g-dev libicu-dev libzstd-dev libzip-dev g++ && \
+    apt-get install -y libpng-dev libjpeg-dev libpq-dev zip unzip sudo wget zlib1g-dev libicu-dev libzstd-dev libzip-dev librdkafka-dev g++ && \
     rm -rf /var/lib/apt/lists/*
 
-RUN yes | pecl install igbinary redis grpc protobuf xdebug-2.9.3
+RUN yes | pecl install igbinary redis grpc protobuf xdebug-2.9.3  rdkafka-3.1.3
 
 RUN docker-php-ext-install intl && \
     docker-php-ext-install gd && \
@@ -17,10 +17,8 @@ RUN docker-php-ext-install intl && \
     docker-php-ext-enable redis && \
     docker-php-ext-enable grpc && \
     docker-php-ext-enable protobuf && \
-    docker-php-ext-enable xdebug
-
-RUN echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/docker-php-memlimit.ini;
-RUN echo 'memory_limit = -1' >> /usr/local/etc/php/conf.d/memory-limit-php.ini;
+    docker-php-ext-enable xdebug && \
+    docker-php-ext-enable rdkafka
 
 ## Install composer
 RUN curl -sS https://getcomposer.org/installer | php
