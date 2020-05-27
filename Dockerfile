@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get install -y libpng-dev libjpeg-dev libpq-dev zip unzip sudo wget zlib1g-dev libicu-dev libzstd-dev libzip-dev librdkafka-dev g++ && \
     rm -rf /var/lib/apt/lists/*
 
-RUN yes | pecl install igbinary redis grpc protobuf xdebug-2.9.3  rdkafka-3.1.3
+RUN yes | pecl install igbinary redis grpc protobuf xdebug-2.9.3 rdkafka-3.1.3
 
 RUN docker-php-ext-install intl && \
     docker-php-ext-install gd && \
